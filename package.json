@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run sitemap && vite build",
+    "build": "vite build"
+,
     "preview": "vite preview --port 4173",
     "sitemap": "node scripts/generate-sitemap.mjs"
   },
-  "engines": {
-    "node": ">=18"
+  "engines": { "node": "20.x" 
+
   },
   "dependencies": {
     "react": "^18.3.1",

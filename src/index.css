@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Color variables ===== */
+:root{
+  --pg-heading: var(--pg-teal);
+  --pg-primary:#044660;
+  --pg-secondary:#0866A0;
+  --pg-teal:#02554C;
+  --pg-blue:#366FC0;
+  --pg-sunset:#FF7A3F;
+  --pg-emerald:#059669;       /* ~Tailwind emerald-600 */
+  --pg-emerald-dark:#047857;
+
+  /* Brand color fallback (CTA buttons read this).
+     CTASection sets this from <footer> at runtime. */
+  --pg-brand:#0F4C5C;
+}
+
+/* Basic layout helpers */
+html,body,#root{height:100%;}
+img,video,canvas,svg{max-width:100%;height:auto;}
+*{word-break:break-word;}
+
+/* ===== Animated gradient background (hero/app) ===== */
+@keyframes appGradient{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+.hero-animated-bg,
+.app-animated-bg{
+  background:linear-gradient(120deg,var(--pg-primary),var(--pg-secondary),var(--pg-teal),var(--pg-blue));
+  background-size:200% 200%;
+  animation:appGradient 18s ease infinite;
+}
+
+/* Misc utilities retained */
+.sticky-shadow{box-shadow:0 10px 24px -12px rgba(0,0,0,.35);}
+.scrollbar-none::-webkit-scrollbar{display:none;}
+.scrollbar-none{-ms-overflow-style:none;scrollbar-width:none;}
+
+/* ===================== 3D BUTTON SYSTEM ===================== */
+@layer components{
+  /* Base 3D button (used by all variants) */
+  .btn-3d{
+    @apply relative inline-flex items-center justify-center rounded-2xl font-semibold
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+           transition-transform duration-200 ease-out will-change-transform select-none;
+    transform:translateY(0);
+  }
+  .btn-3d:hover{transform:translateY(-1.5px);}
+  .btn-3d:active{transform:translateY(0);}
+
+  /* Neutral/white variant */
+  .btn-3d-white{
+    @apply border border-slate-300 bg-white text-slate-800;
+    box-shadow:0 6px 14px rgba(15,23,42,.08);
+  }
+  .btn-3d-white:hover{
+    @apply bg-slate-50;
+    box-shadow:0 10px 22px rgba(15,23,42,.12);
+  }
+
+  /* Emerald variant — identical effect as brand, just green */
+  .btn-3d-emerald{
+    @apply text-white rounded-2xl;
+    /* fallbacks */
+    background-color:var(--pg-emerald);
+    background-image:linear-gradient(135deg,var(--pg-emerald),var(--pg-emerald));
+    box-shadow:0 10px 20px rgba(15,23,42,.10);
+    /* modern enhancement (overrides if supported) */
+    background-image:linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--pg-emerald) 92%, white),
+      color-mix(in oklab, var(--pg-emerald) 80%, black)
+    );
+    box-shadow:0 10px 20px color-mix(in srgb, var(--pg-emerald), transparent 80%);
+  }
+  .btn-3d-emerald:hover{
+    /* fallback */
+    filter:brightness(1.05);
+    box-shadow:0 14px 26px rgba(15,23,42,.12);
+    /* enhancement */
+    background-image:linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--pg-emerald) 96%, white),
+      var(--pg-emerald)
+    );
+    box-shadow:0 14px 26px color-mix(in srgb, var(--pg-emerald), transparent 76%);
+  }
+  .btn-3d-emerald:active{
+    box-shadow:0 8px 16px rgba(15,23,42,.10);
+    box-shadow:0 8px 16px color-mix(in srgb, var(--pg-emerald), transparent 80%);
+  }
+
+  /* Brand variant — pulls color from --pg-brand (footer color) */
+  .btn-3d-brand{
+    @apply text-white rounded-2xl;
+    /* fallbacks */
+    background-color:var(--pg-brand);
+    background-image:linear-gradient(135deg,var(--pg-brand),var(--pg-brand));
+    box-shadow:0 10px 20px rgba(15,23,42,.10);
+    /* modern enhancement (overrides if supported) */
+    background-image:linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--pg-brand) 92%, white),
+      color-mix(in oklab, var(--pg-brand) 80%, black)
+    );
+    box-shadow:0 10px 20px color-mix(in srgb, var(--pg-brand), transparent 80%);
+  }
+  .btn-3d-brand:hover{
+    /* fallback */
+    filter:brightness(1.05);
+    box-shadow:0 14px 26px rgba(15,23,42,.12);
+    /* enhancement */
+    background-image:linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--pg-brand) 96%, white),
+      var(--pg-brand)
+    );
+    box-shadow:0 14px 26px color-mix(in srgb, var(--pg-brand), transparent 76%);
+  }
+  .btn-3d-brand:active{
+    box-shadow:0 8px 16px rgba(15,23,42,.10);
+    box-shadow:0 8px 16px color-mix(in srgb, var(--pg-brand), transparent 80%);
+  }
+
+  /* Sizes */
+  .btn-3d-sm{@apply h-10 px-4 text-sm;}
+  .btn-3d-md{@apply h-12 px-6;}
+  .btn-3d-lg{@apply h-14 px-8 text-base;}
+
+  /* Button typography helper (optional) */
+  .btn-3d-text{
+    @apply font-[Inter] leading-tight tracking-[0.01em] antialiased;
+  }
+
+  /* Alias used elsewhere (Contact page, etc.) */
+  .pg-btn-primary{
+    @apply inline-flex items-center justify-center rounded-2xl font-semibold text-white h-12 px-6;
+    background-color:var(--pg-brand);
+    background-image:linear-gradient(135deg,var(--pg-brand),var(--pg-brand));
+    box-shadow:0 10px 20px rgba(15,23,42,.10);
+  }
+  .pg-btn-primary:hover{
+    filter:brightness(1.05);
+    box-shadow:0 14px 26px rgba(15,23,42,.12);
+  }
+
+  /* Soft emerald utility (used for the Share button) */
+  .btn-soft-emerald{
+    @apply inline-flex items-center gap-2 px-3 py-2 rounded-full
+           border border-emerald-200 bg-emerald-50 text-slate-700
+           shadow-sm hover:bg-emerald-100/70 focus-visible:ring-2 focus-visible:ring-emerald-200;
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .btn-3d,.btn-3d:hover,.btn-3d:active{transition:none;transform:none !important;}
+  }
+}
+
+/* ========= One-time subtle border shimmer for Featured card ========= */
+@keyframes hpgShimmer {
+  from { background-position: -200% 0; }
+  to   { background-position: 200% 0; }
+}
+.shimmer-once{
+  position: relative;
+}
+.shimmer-once::after{
+  content:"";
+  position:absolute;
+  inset:-1px;                 /* covers border */
+  border-radius:inherit;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,
+      transparent,
+      color-mix(in srgb, var(--pg-sunset), white 60%),
+      transparent);
+  background-size:200% 100%;
+  animation:hpgShimmer 1.2s ease forwards;
+  opacity:.6;
+}
+/* Base article typography */
+html, body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif; }
+
+.article h1,
+.article h2,
+.article h3,
+.article h4{
+  font-family: "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif;
+}-->
+.article h1 { font-weight: 800; }
+.article h2, .article h3 { font-weight: 700; }
+/* Explicit article heading sizes (Tailwind resets headings to inherit) */
+.article h1 {
+  font-size: clamp(28px, 4vw, 36px);
+  line-height: 1.2;
+  margin: 1.25rem 0 .75rem;
+}
+.article h2 {
+  font-size: clamp(20px, 2.6vw, 26px);
+  line-height: 1.3;
+  margin: 1.25rem 0 .5rem;
+}
+.article h3 {
+  font-size: clamp(18px, 2vw, 20px);
+  line-height: 1.35;
+  margin: 1rem 0 .5rem;
+}
+.article h4 {
+  font-size: clamp(16px, 1.8vw, 18px);
+  line-height: 1.4;
+  margin: .75rem 0 .5rem;
+}
+/* Ensure Inter for article body text */
+.article {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif;
+}
+
+/* Optional: your brand color for article headings */
+/* Force heading color + font on subheads (wins over prose/Tailwind defaults) */
+.article :is(h2, h3, h4) {
+  font-family: "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif !important;
+  color: var(--pg-teal, #02554C) !important;  /* on-brand, readable */
+}
+.target-flash{outline:3px solid rgba(5,150,105,.45);outline-offset:3px;animation:hpgTargetPulse .9s ease-out forwards}
+@keyframes hpgTargetPulse{0%{box-shadow:0 0 0 0 rgba(5,150,105,.35)}100%{box-shadow:0 0 0 14px rgba(5,150,105,0)}}
+
+#feature-business,
+#email-capture {
+  scroll-margin-top: 84px; /* match your HEADER_OFFSET */
+}
+
+
+
+
+
+

@@ -1,0 +1,27 @@
+{
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/(.*)", "destination": "/" }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "hiddenpg.ca" }],
+      "destination": "https://hiddenprincegeorge.ca/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.hiddenpg.ca" }],
+      "destination": "https://hiddenprincegeorge.ca/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.hiddenprincegeorge.ca" }],
+      "destination": "https://hiddenprincegeorge.ca/:path*",
+      "permanent": true
+    }
+
+  ]
+}

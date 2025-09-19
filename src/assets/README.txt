@@ -1,0 +1,1 @@
+Optional: place hero-bg.jpg here if you want a decorative hero background image.
