@@ -10,14 +10,14 @@
     <meta name="description" content="Trails, cafés, hidden spots, and local businesses in Prince George — curated gems, stories, and a fast search to find your next favorite place." />
     <link rel="canonical" href="https://hiddenprincegeorge.ca/" />
 
-    <!-- Favicons (single set; files in /public) -->
-    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <!-- Favicons (root-level, Google-compliant) -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#062A27">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -46,23 +46,32 @@
       }
     </style>
 
-    <!-- Schema (kept, with absolute logo) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Hidden Prince George",
-      "url": "https://hiddenprincegeorge.ca",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Hidden Prince George",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://hiddenprincegeorge.ca/email-logo.png"
-        }
-      }
-    }
-    </script>
+    <!-- WebSite schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Hidden Prince George",
+  "url": "https://hiddenprincegeorge.ca"
+}
+</script>
+
+<!-- Organization schema (this is what powers the brand logo) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Hidden Prince George",
+  "url": "https://hiddenprincegeorge.ca",
+  "logo": "https://hiddenprincegeorge.ca/logo-512.png",
+  "sameAs": [
+    "https://www.instagram.com/your-handle",
+    "https://www.facebook.com/your-page",
+    "https://x.com/your-handle"
+  ]
+}
+</script>
+
   </head>
   <body class="bg-white text-slate-900">
     <div id="root"></div>
