@@ -4,15 +4,15 @@
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "strict": true,
+    "skipLibCheck": true,
 
-    // ⬇️ Aliases you’re already using in the project
+    // Path aliases (kept from your existing config)
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
@@ -23,9 +23,14 @@
       "@data/*": ["src/data/*"]
     },
 
-    // ⬇️ Helps TypeScript understand Vite globals like import.meta.env
-    "types": ["vite/client"]
+    // Allow Vite globals + Node globals (fixes `process` errors)
+    "types": ["node", "vite/client"]
   },
-  "include": ["src"],
+
+  // Ensure API and scripts are type-checked
+  "include": ["src", "api", "scripts"],
+  "exclude": ["node_modules", "dist"],
+
+  // keep your Node-specific secondary config, if used
   "references": [{ "path": "./tsconfig.node.json" }]
 }
