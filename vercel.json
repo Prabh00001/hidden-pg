@@ -22,6 +22,13 @@
       "destination": "https://hiddenprincegeorge.ca/:path*",
       "permanent": true
     }
-
+  ],
+  "headers": [
+    {
+      "source": "/(favicon\\.ico|favicon-.*\\.ico|favicon.*\\.png|logo-512\\.png|site\\.webmanifest)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=0, must-revalidate" }
+      ]
+    }
   ]
 }
