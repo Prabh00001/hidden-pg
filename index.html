@@ -11,14 +11,14 @@
     <link rel="canonical" href="https://hiddenprincegeorge.ca/">
     <meta property="og:site_name" content="Hidden Prince George">
 
-    <!-- Favicons (root-level, Google-compliant) -->
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png">
+<!-- Favicons (versioned to force Google re-fetch) -->
+<link rel="icon" href="/favicon-2025.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-v2.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#062A27">
+
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -51,19 +51,15 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Hidden Prince George",
-  "alternateName": ["Hidden PG"],
-  "url": "https://hiddenprincegeorge.ca"
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Hidden Prince George",
   "url": "https://hiddenprincegeorge.ca",
-  "logo": "https://hiddenprincegeorge.ca/logo-512.png"
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://hiddenprincegeorge.ca/logo-512.png",
+    "width": 512,
+    "height": 512
+  }
 }
 </script>
 
