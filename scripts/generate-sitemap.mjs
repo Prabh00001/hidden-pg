@@ -10,7 +10,8 @@ const routes = [
   "/hidden-gems-prince-george",
   "/events",
   "/about",
-  "/contact"
+  "/contact",
+  "/favicon-check.html"   // new: force crawl of fresh page
 ];
 
 const urlset = routes.map(p => `
