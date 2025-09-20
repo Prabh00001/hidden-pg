@@ -2,35 +2,99 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Hidden Prince George — Favicon Check</title>
+  <title>Favicon Check — Hidden Prince George</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://hiddenprincegeorge.ca/favicon-check.html">
 
-  <!-- Same favicon block you use on index.html -->
-  <link rel="icon" href="/favicon-2025.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-v2.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
+  <!-- Match index.html exactly (with cache-busting version) -->
+  <link rel="icon" href="/favicon.ico?v=20250920" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20250920">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20250920">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20250920">
+  <link rel="manifest" href="/site.webmanifest?v=20250920">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20250920">
 
-  <!-- Organization logo (ImageObject with dimensions) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Hidden Prince George",
-    "url": "https://hiddenprincegeorge.ca",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://hiddenprincegeorge.ca/logo-512.png",
-      "width": 512,
-      "height": 512
-    }
-  }
-  </script>
+  <style>
+    :root { --bg:#fff; --fg:#0f172a; --muted:#64748b; --bd:#e5e7eb; }
+    body { background:var(--bg); color:var(--fg); font:14px/1.45 system-ui,Segoe UI,Roboto,Inter,sans-serif; margin:0; padding:24px; }
+    h1 { font-size:20px; margin:0 0 8px; }
+    p { color:var(--muted); margin:0 0 16px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; margin-top:16px; }
+    .card { border:1px solid var(--bd); border-radius:12px; padding:16px; }
+    .row { display:flex; align-items:center; gap:12px; }
+    .box { width:48px; height:48px; display:grid; place-items:center; border:1px solid var(--bd); border-radius:10px; overflow:hidden; }
+    img { max-width:100%; max-height:100%; display:block; }
+    code, .url { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; color:#334155; }
+    .ok { font-size:12px; color:#16a34a; }
+  </style>
 </head>
 <body>
-  <h1>Hidden Prince George — Favicon Check</h1>
-  <p>If you can see this page live, Google can too.</p>
+  <h1>Favicon Check — Hidden Prince George</h1>
+  <p>If all icons below show the correct logo and return <code>200 OK</code>, Google has what it needs.</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="row">
+        <div class="box"><img src="/favicon-16x16.png?v=20250920" alt=""></div>
+        <div>
+          <div>16×16 PNG</div>
+          <div class="url">/favicon-16x16.png?v=20250920</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div class="box"><img src="/favicon-32x32.png?v=20250920" alt=""></div>
+        <div>
+          <div>32×32 PNG</div>
+          <div class="url">/favicon-32x32.png?v=20250920</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div class="box"><img src="/android-chrome-192x192.png?v=20250920" alt=""></div>
+        <div>
+          <div>Android 192×192</div>
+          <div class="url">/android-chrome-192x192.png?v=20250920</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div class="box"><img src="/android-chrome-512x512.png?v=20250920" alt=""></div>
+        <div>
+          <div>Android 512×512</div>
+          <div class="url">/android-chrome-512x512.png?v=20250920</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div class="box"><img src="/apple-touch-icon.png?v=20250920" alt=""></div>
+        <div>
+          <div>Apple touch 180×180</div>
+          <div class="url">/apple-touch-icon.png?v=20250920</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div class="box"><img src="/favicon.ico?v=20250920" alt=""></div>
+        <div>
+          <div>ICO (multi-size)</div>
+          <div class="url">/favicon.ico?v=20250920</div>
+        </div>
+      </div>
+      <p class="ok">Tip: you can also <span class="url">curl -I https://hiddenprincegeorge.ca/favicon.ico</span> to verify headers.</p>
+    </div>
+  </div>
+
+  <p style="margin-top:16px">Everything look right? Great—your SERP icon will flip as Google refreshes the homepage.</p>
 </body>
 </html>
