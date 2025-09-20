@@ -38,7 +38,7 @@ export default function AboutPage() {
         <div>
           <h2 className="text-xl font-semibold">Get in touch</h2>
           <p className="mt-2">
-            Questions, suggestions, or partnership ideas? Email <a className="underline" href="mailto:hello@hiddenpg.ca">hello@hiddenprincegeorge.ca</a>.
+            Questions, suggestions, or partnership ideas? Email <a className="underline" href="mailto:hello@hiddenprincegeorge.ca">hello@hiddenprincegeorge.ca</a>.
           </p>
         </div>
 

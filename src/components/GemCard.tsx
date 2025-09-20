@@ -67,7 +67,7 @@ export default function GemCard({ gem }: { gem: Gem }) {
                 "name": gem.name,
                 "description": gem.desc,
                 "image": (gem as any).images?.length ? (gem as any).images : [gem.img],
-                "url": `https://hiddenpg.ca/g/${(gem as any).slug || gem.id}`,
+                "url": `https://hiddenprincegeorge.ca/g/${(gem as any).slug || gem.id}`,
                 "address": (gem as any).location || undefined
               }}
             />

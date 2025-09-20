@@ -11,18 +11,21 @@
     <link rel="canonical" href="https://hiddenprincegeorge.ca/">
     <meta property="og:site_name" content="Hidden Prince George">
 
-<!-- Favicons (versioned to force Google re-fetch) -->
- <link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/favicon-2025.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon-v2.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="shortcut icon" href="/favicon-2025.ico">
-<meta name="application-name" content="Hidden Prince George">
-<meta name="apple-mobile-web-app-title" content="Hidden Prince George">
+    <!-- Favicons (versioned to force Google/clients to re-fetch fresh files) -->
+    <!-- Google prefers /favicon.ico at the root -->
+    <link rel="icon" href="/favicon.ico?v=20250920" sizes="any">
+    <!-- PNG fallbacks -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20250920">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20250920">
+    <!-- iOS home screen -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20250920">
+    <!-- Android/Chrome -->
+    <link rel="manifest" href="/site.webmanifest?v=20250920">
+    <!-- Optional: keep SVG for modern browsers (not relied on by Google SERP) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20250920">
 
+    <meta name="application-name" content="Hidden Prince George">
+    <meta name="apple-mobile-web-app-title" content="Hidden Prince George">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -38,12 +41,12 @@
     <meta name="twitter:url" content="https://hiddenprincegeorge.ca/" />
     <meta name="twitter:image" content="https://hiddenprincegeorge.ca/og-hero.jpg" />
 
-    <!-- Fonts (kept) -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Your existing small CSS tweak (unchanged) -->
+    <!-- Tag color tweak -->
     <style>
       #stories .tag, #stories .tags .tag, #stories .tags span,
       #stories .tag-chip, #stories [data-role="tag"], #stories a[href*="/tag/"]{
@@ -51,30 +54,31 @@
       }
     </style>
 
-    <!-- WebSite schema -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Hidden Prince George",
-  "url": "https://hiddenprincegeorge.ca",
-  "logo": {
-    "@type": "ImageObject",
-    "url": "https://hiddenprincegeorge.ca/logo-512.png",
-    "width": 512,
-    "height": 512
-  }
-}
-</script>
-
+    <!-- Organization schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Hidden Prince George",
+      "url": "https://hiddenprincegeorge.ca",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://hiddenprincegeorge.ca/logo-512.png",
+        "width": 512,
+        "height": 512
+      }
+    }
+    </script>
   </head>
   <body class="bg-white text-slate-900">
     <div id="root"></div>
+
     <!-- Temporary crawl helper: remove after indexed -->
-<p style="font-size:12px; text-align:center; margin:24px 0;">
-  <a href="/favicon-check.html" rel="nofollow">Favicon check</a>
-</p>
-    <!-- Leave this dev entrypoint; your Vite build will rewrite it to /assets/*.js -->
+    <p style="font-size:12px; text-align:center; margin:24px 0;">
+      <a href="/favicon-check.html" rel="nofollow">Favicon check</a>
+    </p>
+
+    <!-- Vite entrypoint (rewritten to /assets/*.js in production) -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

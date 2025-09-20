@@ -3,12 +3,12 @@ import { Helmet } from 'react-helmet-async';
 export default function HiddenGemsPrinceGeorge() {
   const title = "Hidden Gems in Prince George, BC (Local Guide)";
   const desc  = "A curated, always-updated list of hidden gems in Prince George: trails, viewpoints, cafes, galleries, and family-friendly places locals love.";
-  const url   = "https://hiddenpg.ca/hidden-gems-prince-george";
+  const url   = "https://hiddenprincegeorge.ca/hidden-gems-prince-george";
 
   const items = [
-    { name: "Ancient Forest / Chun T’oh Whudujut", url: "https://hiddenpg.ca/gems/ancient-forest" },
-    { name: "LC Gunn Park Lookout", url: "https://hiddenpg.ca/gems/lc-gunn-park" },
-    { name: "Two Rivers Gallery", url: "https://hiddenpg.ca/gems/two-rivers-gallery" },
+    { name: "Ancient Forest / Chun T’oh Whudujut", url: "https://hiddenprincegeorge.ca/gems/ancient-forest" },
+    { name: "LC Gunn Park Lookout", url: "https://hiddenprincegeorge/gems/lc-gunn-park" },
+    { name: "Two Rivers Gallery", url: "https://hiddenprincegeorge/gems/two-rivers-gallery" },
     // add your real gem URLs as you publish them
   ];
 

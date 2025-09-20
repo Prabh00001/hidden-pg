@@ -26,7 +26,7 @@ const LazyModalLoader = ({ source }: Props) => {
 
   return (
     <>
-      <div className="mt-12 mb-16 rounded-2xl border border-slate-200/80 bg-white/70 backdrop-blur p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4 shadow-sm">
+      <div id="feature-bottom" className="mt-12 mb-16 rounded-2xl border border-slate-200/80 bg-white/70 backdrop-blur p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4 shadow-sm">
 
         <p className="text-slate-700">
           Are you a local business? <strong>Feature your business</strong> on Hidden PG.

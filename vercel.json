@@ -1,7 +1,24 @@
 {
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/" }
+  "headers": [
+    {
+      "source": "/favicon.ico",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=600, must-revalidate" },
+        { "key": "Content-Type", "value": "image/x-icon" }
+      ]
+    },
+    {
+      "source": "/favicon-:size(16x16|32x32|48x48).png",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/apple-touch-icon.png",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=600, must-revalidate" }
+      ]
+    }
   ],
   "redirects": [
     {
@@ -15,32 +32,9 @@
       "has": [{ "type": "host", "value": "www.hiddenpg.ca" }],
       "destination": "https://hiddenprincegeorge.ca/:path*",
       "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.hiddenprincegeorge.ca" }],
-      "destination": "https://hiddenprincegeorge.ca/:path*",
-      "permanent": true
     }
   ],
-  "headers": [
-    {
-      "source": "/(favicon\\.ico|favicon-.*\\.ico|favicon.*\\.png|logo-512\\.png|site\\.webmanifest)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=0, must-revalidate" }
-      ]
-    },
-    {
-      "source": "/",
-      "headers": [
-        { "key": "Cache-Control", "value": "no-store, max-age=0, s-maxage=0, must-revalidate" }
-      ]
-    },
-    {
-      "source": "/favicon-check.html",
-      "headers": [
-        { "key": "Cache-Control", "value": "no-store, max-age=0, s-maxage=0, must-revalidate" }
-      ]
-    }
+  "rewrites": [
+    { "source": "/favicon-check", "destination": "/favicon-check.html" }
   ]
 }

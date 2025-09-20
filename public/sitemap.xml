@@ -1,8 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://hiddenprincegeorge.ca/</loc></url>
-  <url><loc>https://hiddenprincegeorge.ca/hidden-gems-prince-george</loc></url>
-  <url><loc>https://hiddenprincegeorge.ca/events</loc></url>
-  <url><loc>https://hiddenprincegeorge.ca/about</loc></url>
-  <url><loc>https://hiddenprincegeorge.ca/contact</loc></url>
+
+  <url>
+    <loc>https://hiddenprincegeorge.ca/</loc>
+    <lastmod>2025-09-19T21:06:52.773Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://hiddenprincegeorge.ca/hidden-gems-prince-george</loc>
+    <lastmod>2025-09-19T21:06:52.773Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://hiddenprincegeorge.ca/events</loc>
+    <lastmod>2025-09-19T21:06:52.773Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://hiddenprincegeorge.ca/about</loc>
+    <lastmod>2025-09-19T21:06:52.773Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://hiddenprincegeorge.ca/contact</loc>
+    <lastmod>2025-09-19T21:06:52.773Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://hiddenprincegeorge.ca/favicon-check.html</loc>
+    <lastmod>2025-09-19T21:06:52.773Z</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
 </urlset>

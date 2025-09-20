@@ -62,7 +62,7 @@ export default function PrivacyPage() {
 
         <h2 className="mt-8 text-xl font-semibold">6) Your choices</h2>
         <ul className="list-disc pl-6 space-y-2">
-          <li>Request a copy or deletion of your data by emailing <a className="underline" href="mailto:hello@hiddenpg.ca">hello@hiddenprincegeorge.ca</a>.</li>
+          <li>Request a copy or deletion of your data by emailing <a className="underline" href="mailto:hello@hiddenprincegeorge.ca">hello@hiddenprincegeorge.ca</a>.</li>
           <li>Opt out of non-essential emails anytime (unsubscribe link or email us).</li>
           <li>Request image removal if you no longer want your photos displayed.</li>
         </ul>
@@ -79,7 +79,7 @@ export default function PrivacyPage() {
 
         <h2 className="mt-8 text-xl font-semibold">9) Contact</h2>
         <p>
-          Questions? Email us at <a className="underline" href="mailto:hello@hiddenpg.ca">hello@hiddenprincegeorge.ca</a>.
+          Questions? Email us at <a className="underline" href="mailto:hello@hiddenprincegeorge.ca">hello@hiddenprincegeorge.ca</a>.
         </p>
 
         <div className="mt-10">

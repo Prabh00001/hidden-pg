@@ -40,10 +40,10 @@ export default function BlogPost() {
             alert(successText);
             form.reset();
           } else {
-            alert(body?.error || "Sorry, something went wrong. Please email hello@hiddenpg.ca.");
+            alert(body?.error || "Sorry, something went wrong. Please email hello@hiddenprincegeorge.ca.");
           }
         } catch {
-          alert("Network error. Please email hello@hiddenpg.ca.");
+          alert("Network error. Please email hello@hiddenprincegeorge.ca.");
         }
       };
 
