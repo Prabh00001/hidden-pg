@@ -7,11 +7,11 @@ import App from './App'
 import './index.css'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  <React.StrictMode>
     <HelmetProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </HelmetProvider>
-  </StrictMode>
+    </React.StrictMode>
 )

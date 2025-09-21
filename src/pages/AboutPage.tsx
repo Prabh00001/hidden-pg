@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
+import Seo from '@/components/Seo'
 
 export default function AboutPage() {
   return (
+    <>
+      <Seo
+        title="About Hidden Prince George"
+        description="Our mission: help locals and visitors discover trails, tastes, parks, small businesses and community events in Prince George."
+        image="https://hiddenprincegeorge.ca/og-hero.jpg"
+      />
     <main className="mx-auto max-w-3xl px-4 py-12">
       <h1 className="text-3xl font-semibold tracking-tight">About Hidden PG</h1>
       <p className="mt-4 text-slate-700">
@@ -47,5 +54,6 @@ export default function AboutPage() {
         </div>
       </section>
     </main>
+    </>
   );
 }

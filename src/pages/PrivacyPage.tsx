@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
+import Seo from '@/components/Seo'
 
 export default function PrivacyPage() {
   return (
+    <>
+    <Seo
+        title="Privacy Policy — Hidden PG"
+        description="How Hidden PG collects, uses and protects your information."
+      />
     <main className="mx-auto max-w-3xl px-4 py-12">
       <h1 className="text-3xl font-semibold tracking-tight">Privacy Policy</h1>
       <p className="mt-3 text-slate-600">
@@ -87,5 +93,6 @@ export default function PrivacyPage() {
         </div>
       </section>
     </main>
+    </>
   );
 }

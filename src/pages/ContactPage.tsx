@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Seo from '@/components/Seo'
 
 /** shared fetch helper */
 async function postLead(payload: Record<string, any>) {
@@ -64,6 +65,11 @@ export default function ContactPage() {
 
   return (
     <div className="pb-16">
+      <Seo
+        title="Contact Hidden Prince George"
+        description="Questions, suggestions or partnerships — reach the Hidden PG team."
+        image="https://hiddenprincegeorge.ca/og-hero.jpg"
+      />
       {/* Top gradient band + wave to match theme */}
       <section className="relative app-animated-bg text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

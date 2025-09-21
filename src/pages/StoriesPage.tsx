@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BLOG } from '../data/blog';
 import { track } from '../utils/analytics';
+import Seo from '@/components/Seo'
 
 function slugify(s: string) {
   return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');

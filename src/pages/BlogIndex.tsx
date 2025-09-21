@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
 import { posts } from "../data/posts";
+import Seo from '@/components/Seo' // add this
 
 export default function BlogIndex() {
   return (
+    <>
+      <Seo
+        title="Hidden PG Blog — Local Guides & Tips"
+        description="Hand-picked guides and local tips from Hidden PG: trails, cafés, hidden spots and weekend ideas."
+        image="https://hiddenprincegeorge.ca/og-hero.jpg"
+      />
     <div className="max-w-5xl mx-auto px-4 py-10">
       <header className="mb-8">
         <h1 className="text-3xl md:text-4xl font-bold">Blog</h1>
@@ -56,5 +63,6 @@ export default function BlogIndex() {
         ))}
       </ul>
     </div>
+    </>
   );
 }

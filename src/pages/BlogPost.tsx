@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import Head from "../components/Head";
+import Seo from '@/components/Seo' // add this
 import { getPostBySlug } from "../data/posts";
 import MobileStickyCTA from "../components/MobileStickyCTA";
 import CTAInline from "../components/CTAInline";
@@ -178,7 +178,11 @@ export default function BlogPost() {
 
   return (
     <>
-      <Head title={`${post.title} | Hidden PG`} description={post.description} image={post.hero} />
+    <Seo
+      title={post.title}
+      description={post.description}
+      image={post.hero || "https://hiddenprincegeorge.ca/og-hero.jpg"}
+    />
 
       {/* Blog type styling (scoped) */}
       <style>{`

@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { events } from "../data/events";
 import EventCard from "../components/EventCard";
+import Seo from '@/components/Seo'
 
 type ModalType = "feature" | "submit";
 
@@ -110,6 +111,11 @@ export default function EventsPage() {
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 md:px-6 lg:px-8 py-10">
+      <Seo
+        title="Prince George Events — What’s On"
+        description="Find concerts, markets, family-friendly happenings and more. Feature your event for priority placement."
+        image="https://hiddenprincegeorge.ca/og-hero.jpg"
+      />
       {/* JSON-LD */}
       <script
         type="application/ld+json"

@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import Seo from '@/components/Seo'
 
 export default function HiddenGemsPrinceGeorge() {
   const title = "Hidden Gems in Prince George, BC (Local Guide)";
@@ -7,14 +8,14 @@ export default function HiddenGemsPrinceGeorge() {
 
   const items = [
     { name: "Ancient Forest / Chun T’oh Whudujut", url: "https://hiddenprincegeorge.ca/gems/ancient-forest" },
-    { name: "LC Gunn Park Lookout", url: "https://hiddenprincegeorge/gems/lc-gunn-park" },
-    { name: "Two Rivers Gallery", url: "https://hiddenprincegeorge/gems/two-rivers-gallery" },
+    { name: "LC Gunn Park Lookout", url: "https://hiddenprincegeorge.ca/gems/lc-gunn-park" },
+    { name: "Two Rivers Gallery", url: "https://hiddenprincegeorge.ca/gems/two-rivers-gallery" },
     // add your real gem URLs as you publish them
   ];
 
   return (
     <>
-      <Helmet>
+            <Seo title={title} description={desc} image="https://hiddenprincegeorge.ca/og-hero.jpg" />
         <title>{title}</title>
         <meta name="description" content={desc} />
         <link rel="canonical" href={url} />
@@ -26,8 +27,6 @@ export default function HiddenGemsPrinceGeorge() {
             "@type":"ListItem", "position": i+1, "name": it.name, "url": it.url
           }))
         })}</script>
-      </Helmet>
-
       <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 className="text-3xl md:text-4xl font-bold">Hidden Gems in Prince George, BC</h1>
         <p className="mt-2 text-slate-600">{desc}</p>

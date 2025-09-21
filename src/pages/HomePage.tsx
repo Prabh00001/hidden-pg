@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { posts } from '../data/posts';
 import EventsSection from '../components/EventsSection';
 import CTASection from '../components/CTASection';
+import Seo from '@/components/Seo'
 
 export default function HomePage() {
   const [query, setQuery] = useState('');
@@ -40,7 +41,11 @@ export default function HomePage() {
 
   return (
     <>
-      {/* HERO (full-bleed background; inner copy width is controlled inside Hero) */}
+      <Seo
+        title="Hidden Prince George — Discover Trails, Cafés & Hidden Gems"
+        description="Curated guides and a fast search to find trails, cafés, hidden spots, local businesses and events in Prince George."
+        image="https://hiddenprincegeorge.ca/og-hero.jpg"
+      />{/* HERO (full-bleed background; inner copy width is controlled inside Hero) */}
       <Hero
         query={query}
         setQuery={setQuery}
