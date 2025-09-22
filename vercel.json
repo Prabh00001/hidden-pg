@@ -36,10 +36,7 @@
   ],
   "rewrites": [
     { "source": "/favicon-check", "destination": "/favicon-check.html" },
-    {
-      "source": "/(.*)",
-      "missing": [{ "type": "file" }],
-      "destination": "/index.html"
-    }
+
+        { "source": "/((?!.*\\.).*)", "destination": "/index.html" }
   ]
 }
