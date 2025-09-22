@@ -1,3 +1,5 @@
+import DOMPurify from "dompurify";
+import { useMemo } from "react";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Seo from '@/components/Seo' // add this
@@ -155,6 +157,18 @@ export default function BlogPost() {
         })),
       }
     : null;
+    
+const cleanHtml = useMemo(() => {
+  return DOMPurify.sanitize(post?.html ?? "", {
+    // allow safe embeds & common attributes used in your posts
+    ADD_TAGS: ["iframe", "figure", "figcaption"],
+    ADD_ATTR: [
+      "allow", "allowfullscreen", "frameborder",
+      "loading", "referrerpolicy", "sizes", "srcset", "decoding",
+      "target", "rel", "style", "width", "height"
+    ]
+  });
+}, [post?.html]);
 
       const articleJsonLd = {
       "@context": "https://schema.org",
@@ -183,6 +197,7 @@ export default function BlogPost() {
       description={post.description}
       image={post.hero || "https://hiddenprincegeorge.ca/og-hero.jpg"}
     />
+    
 
       {/* Blog type styling (scoped) */}
       <style>{`
@@ -273,8 +288,9 @@ export default function BlogPost() {
   <article
     id="article-root"
     className="article p-6 sm:p-8"
-    dangerouslySetInnerHTML={{ __html: post.html }}
+    dangerouslySetInnerHTML={{ __html: cleanHtml }}
   />
+  
 </div>
 <ArticleFooterItinerary source={`blog:${post.slug}`} />
 {/* Inline CTA (lazy-loaded form) */}
