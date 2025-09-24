@@ -15,3 +15,18 @@ export function track(event: string, payload: Payload = {}) {
     console.debug('[track]', event, payload);
   }
 }
+export function trackGemOpen(id: string, title: string) {
+  track?.("gem_open", { id, title });
+}
+
+export function trackGemClickWebsite(id: string, title: string, url: string) {
+  track?.("gem_click_website", { id, title, url });
+}
+
+export function trackGemClickCall(id: string, title: string, phone: string) {
+  track?.("gem_click_call", { id, title, phone });
+}
+
+export function trackGemClickDirections(id: string, title: string, mapsUrl: string) {
+  track?.("gem_click_directions", { id, title, mapsUrl });
+}

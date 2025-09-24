@@ -4,8 +4,12 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "ts-prune": "ts-prune -g"
-  },
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview --strictPort --port 4173",
+  "typecheck": "tsc --noEmit",
+  "ts-prune": "ts-prune -g"
+},
   "engines": {
     "node": "20.x"
   },

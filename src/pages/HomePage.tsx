@@ -3,14 +3,14 @@ import Hero from '../components/Hero';
 import Filters from '../components/Filters';
 import GemGrid from '../components/GemGrid';
 import { GEMS } from '../data/gems';
-import { Category } from '../types';
+import { Category, Gem } from '../types';
 import { scrollToId } from '../utils/useScrollTo';
 const FeaturedCarousel = React.lazy(() => import('../components/FeaturedCarousel'));
 import { Link } from 'react-router-dom';
 import { posts } from '../data/posts';
 import EventsSection from '../components/EventsSection';
 import CTASection from '../components/CTASection';
-import Seo from '@/components/Seo'
+import Seo from '@/components/Seo';
 
 export default function HomePage() {
   const [query, setQuery] = useState('');
@@ -18,15 +18,20 @@ export default function HomePage() {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return GEMS.filter((g) => {
+    return GEMS.filter((g: Gem) => {
       const inCat = category === 'All' || g.category === category;
       if (!q) return inCat;
+
+      const title = (g.title ?? g.name ?? '').toLowerCase();
+      const desc = (g.description ?? g.desc ?? '').toLowerCase();
+      const tags = (g.tags ?? []).map((t: string) => t.toLowerCase());
+
       return (
         inCat &&
         (
-          g.name.toLowerCase().includes(q) ||
-          (g.desc?.toLowerCase() ?? '').includes(q) ||
-          g.tags.some((t) => t.toLowerCase().includes(q))
+          title.includes(q) ||
+          desc.includes(q) ||
+          tags.some((t: string) => t.includes(q))
         )
       );
     });
@@ -45,7 +50,8 @@ export default function HomePage() {
         title="Hidden Prince George — Discover Trails, Cafés & Hidden Gems"
         description="Curated guides and a fast search to find trails, cafés, hidden spots, local businesses and events in Prince George."
         image="https://hiddenprincegeorge.ca/og-hero.jpg"
-      />{/* HERO (full-bleed background; inner copy width is controlled inside Hero) */}
+      />
+      {/* HERO (full-bleed background; inner copy width is controlled inside Hero) */}
       <Hero
         query={query}
         setQuery={setQuery}
@@ -99,7 +105,7 @@ export default function HomePage() {
                 <p className="mt-2 text-sm text-slate-600">{p.description}</p>
 
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {p.tags.slice(0, 3).map((t) => (
+                  {p.tags.slice(0, 3).map((t: string) => (
                     <span
                       key={t}
                       className="text-[11px] px-2 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200"

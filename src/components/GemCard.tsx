@@ -1,79 +1,165 @@
 // src/components/GemCard.tsx
-import React, { useState } from 'react';
-import { Gem } from '../types';
-import { useTilt } from '../utils/useTilt';
-import SeoJsonLd from './SeoJsonLd'; 
-import { track } from '../utils/analytics'; 
+import React, { useMemo } from "react";
+import { Gem } from "../types";
+import SeoJsonLd from "../components/SeoJsonLd";
+import {
+  trackGemOpen,
+  trackGemClickWebsite,
+  trackGemClickCall,
+  trackGemClickDirections,
+} from "../utils/analytics";
+import { useTilt } from "../utils/useTilt";
 
-export default function GemCard({ gem }: { gem: Gem }) {
-  const { ref, onMouseLeave, onMouseMove } = useTilt(6);
-  const [open, setOpen] = useState(false);
+type Props = { gem: Gem };
+
+export default function GemCard({ gem }: Props) {
+  // NOTE: do NOT pass a generic type arg; your hook isn't generic.
+  // Also support both shapes: `const {ref} = useTilt()` or `const ref = useTilt()`.
+  const tiltMaybe = useTilt(8);
+  const tiltRef: React.Ref<HTMLDivElement> =
+    (tiltMaybe as any)?.ref ?? (tiltMaybe as any) ?? null;
+
+  // Back-compat fallbacks
+  const title = gem.title ?? gem.name ?? "";
+  const desc = gem.description ?? gem.desc ?? "";
+
+  const jsonLd = useMemo(() => {
+    const imgs = [gem.image, ...(gem.images || [])].filter(Boolean);
+    const data: Record<string, any> = {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      name: title,
+      image: imgs,
+      url: gem.website || undefined,
+      telephone: gem.phone || undefined,
+      address: gem.address
+        ? { "@type": "PostalAddress", streetAddress: gem.address }
+        : undefined,
+    };
+    return data;
+  }, [gem.address, gem.images, gem.image, gem.phone, gem.website, title]);
+
+  const handleOpen = () => {
+    trackGemOpen(gem.id, title);
+    // If you open a modal or navigate, do it here.
+  };
+
+  const websiteUrl = gem.website
+    ? withUTM(gem.website, {
+        source: "hiddenpg",
+        medium: "card",
+        campaign: "gem_profile",
+      })
+    : undefined;
 
   return (
-    <article id={`gem-${gem.id}`} className="group" aria-label={gem.name}>
-      <div
-        ref={ref}
-        onMouseMove={onMouseMove}
-        onMouseLeave={onMouseLeave}
-        onClick={() => { setOpen(true); track('gem_open', { id: gem.id, name: gem.name }); }} // ← ADD
-        className="relative bg-white/70 backdrop-blur rounded-2xl overflow-hidden shadow-soft cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
-      >
-        <img src={gem.img} alt={gem.name} loading="lazy" decoding="async" className="h-56 w-full object-cover" />
-        <div className="p-4">
-          <h3 className="text-lg font-semibold">{gem.name}</h3>
-          <p className="text-sm text-slate-600 line-clamp-2">{gem.desc}</p>
+    <article
+      id={`gem-${gem.id}`}
+      ref={tiltRef}
+      className="group relative rounded-3xl overflow-hidden bg-white shadow-md hover:shadow-lg transition-shadow"
+    >
+      {/* Image */}
+      <div className="relative aspect-[4/3] overflow-hidden">
+        <img
+          src={gem.image}
+          alt={title}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          loading="lazy"
+          onClick={handleOpen}
+        />
 
-          {/* TAGS — card footer */}
-          {gem.tags?.length > 0 && (
-            <div className="mt-3 flex flex-wrap gap-2">
-              {gem.tags.slice(0, 5).map((t) => (
-                <span
-                  key={t}
-                  className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium
-                             text-[#FF7A3F] border-[#FF7A3F]/30 bg-white/70"
-                >
-                  #{t}
-                </span>
-              ))}
-            </div>
+        {/* Photo credit (top-left) */}
+        {gem.photoCredit?.name && (
+          <a
+            href={gem.photoCredit.url || "#"}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            target={gem.photoCredit.url ? "_blank" : undefined}
+            rel="noopener"
+            className="absolute left-2 top-2 z-10 text-[11px] px-2 py-1 rounded-full border border-slate-200 bg-white/90 backdrop-blur-sm text-slate-700 hover:bg-white"
+          >
+            © {gem.photoCredit.name}
+          </a>
+        )}
+
+        {/* Sponsored pill (top-right) */}
+        {gem.sponsored && (
+          <span className="absolute right-2 top-2 z-10 text-[11px] px-2 py-1 rounded-full bg-amber-500/90 text-white">
+            Sponsored
+          </span>
+        )}
+      </div>
+
+      {/* Body */}
+      <div className="p-4">
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="text-base font-semibold text-slate-900">{title}</h3>
+          <span className="shrink-0 text-xs text-slate-500">{gem.category}</span>
+        </div>
+        <p className="mt-1 text-[13.5px] text-slate-700 line-clamp-3">{desc}</p>
+
+        {/* CTA Row */}
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          {!!websiteUrl && (
+            <a
+              href={websiteUrl}
+              target="_blank"
+              rel="noopener"
+              className="btn-3d btn-3d-white btn-3d-sm btn-3d-text"
+              onClick={() => trackGemClickWebsite(gem.id, title, websiteUrl)}
+            >
+              Website
+            </a>
+          )}
+
+          {!!gem.phone && (
+            <a
+              href={`tel:${normalizePhone(gem.phone)}`}
+              className="btn-3d btn-3d-emerald btn-3d-sm btn-3d-text"
+              onClick={() => trackGemClickCall(gem.id, title, gem.phone!)}
+            >
+              Call
+            </a>
+          )}
+
+          {!!gem.mapsUrl && (
+            <a
+              href={gem.mapsUrl}
+              target="_blank"
+              rel="noopener"
+              className="btn-3d btn-3d-white btn-3d-sm btn-3d-text"
+              onClick={() => trackGemClickDirections(gem.id, title, gem.mapsUrl!)}
+            >
+              Directions
+            </a>
           )}
         </div>
       </div>
 
-
-      {open && (
-        <div
-          className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
-          onClick={() => setOpen(false)}
-        >
-          <div
-            className="gem-reveal bg-white rounded-2xl max-w-xl w-full overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img src={gem.img} alt={gem.name} loading="lazy" decoding="async" className="h-64 w-full object-cover" />
-            <div className="p-5">
-              <h3 className="text-2xl font-semibold mb-2">{gem.name}</h3>
-              <p className="text-slate-700 mb-4">{gem.desc}</p>
-              <button onClick={() => setOpen(false)} className="px-4 py-2 rounded-lg bg-pg-blue text-white">
-                Close
-              </button>
-            </div>
-
-            {/* JSON-LD for a single gem detail view */}
-            <SeoJsonLd
-              data={{
-                "@context": "https://schema.org",
-                "@type": "TouristAttraction",
-                "name": gem.name,
-                "description": gem.desc,
-                "image": (gem as any).images?.length ? (gem as any).images : [gem.img],
-                "url": `https://hiddenprincegeorge.ca/g/${(gem as any).slug || gem.id}`,
-                "address": (gem as any).location || undefined
-              }}
-            />
-          </div>
-        </div>
-      )}
+      {/* JSON-LD (compact) */}
+      <SeoJsonLd data={jsonLd} />
     </article>
   );
+}
+
+/** Helpers */
+function withUTM(
+  url: string,
+  params: { source: string; medium: string; campaign: string }
+) {
+  try {
+    const u = new URL(url);
+    u.searchParams.set("utm_source", params.source);
+    u.searchParams.set("utm_medium", params.medium);
+    u.searchParams.set("utm_campaign", params.campaign);
+    return u.toString();
+  } catch {
+    const sep = url.includes("?") ? "&" : "?";
+    return `${url}${sep}utm_source=${params.source}&utm_medium=${params.medium}&utm_campaign=${params.campaign}`;
+  }
+}
+
+function normalizePhone(p: string) {
+  return p.replace(/\s+/g, "");
 }

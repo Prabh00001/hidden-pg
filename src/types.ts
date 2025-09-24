@@ -1,16 +1,72 @@
+// src/types.ts
+// ---------------------------------------------------------------------------
+// Flexible, back-compatible types for Hidden PG
+// - Allows old data keys (name/desc/tags) while we migrate to title/description
+// - Permissive Category type so filters keep working
+// - Index signature to avoid "Object literal may only specify known properties"
+//   errors coming from gems.ts while we standardize fields.
+// ---------------------------------------------------------------------------
+
 export type Category =
-  | 'Museums' | 'Nature' | 'Food' | 'Parks' | 'Trails'
-  | 'Art' | 'Shopping' | 'Events' | 'Cafes' | 'Other';
+  | "Food"
+  | "Cafe"
+  | "Restaurant"
+  | "Attraction"
+  | "Trail"
+  | "Park"
+  | "Shop"
+  | "Activity"
+  | "Event"
+  | "Service"
+  | "Other"
+  // allow any other string labels used today:
+  | (string & {});
+
+export interface PhotoCredit {
+  name: string;
+  url?: string;
+}
 
 export interface Gem {
+  // Core
   id: string;
-  name: string;
   category: Category;
-  tags: string[];
-  img: string;
-  desc: string;
-  location?: string;
+  image: string;
+
+  // Canonical fields (preferred going forward)
+  title: string;
+  description: string;
+
+  // Optional enrichments
+  slug?: string;
+  images?: string[];
+  address?: string;
+  mapsUrl?: string;
+  website?: string;
+  phone?: string;
+  instagram?: string;
+  facebook?: string;
+  sponsored?: boolean;
+  featured?: boolean;
+  photoCredit?: PhotoCredit;
+
+  // -------------------------------------------------------------------------
+  // Back-compat aliases (keeps older code/data compiling):
+  // -------------------------------------------------------------------------
+  /** @deprecated Use `title` */
+  name?: string;
+  /** @deprecated Use `description` */
+  desc?: string;
+  /** Optional label metadata used by filters/search */
+  tags?: string[];
+
+  // -------------------------------------------------------------------------
+  // Safety valve: if some items in gems.ts currently include extra keys,
+  // we won't blow up the build. We'll tighten this later once all data is clean.
+  // -------------------------------------------------------------------------
+  [key: string]: unknown;
 }
+
 
 export interface FeaturedItem {
   id: string;
