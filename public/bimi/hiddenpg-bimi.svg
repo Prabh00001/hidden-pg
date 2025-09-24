@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     baseProfile="tiny-ps" version="1.2" viewBox="0 0 256 256">
+  <title>Hidden Prince George</title>
+  <desc>Hidden PG brand mark for BIMI</desc>
+  <!-- Solid background (BIMI logos should not be transparent) -->
+  <rect x="0" y="0" width="256" height="256" rx="48" ry="48" fill="#044660"/>
+  <!-- Simple "gem" mark -->
+  <polygon points="128,32 208,96 176,208 80,208 48,96"
+           fill="#F9A11B"/>
+  <polygon points="128,32 128,208 80,208" fill="#FFCE85"/>
+</svg>
