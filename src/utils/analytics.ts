@@ -30,3 +30,9 @@ export function trackGemClickCall(id: string, title: string, phone: string) {
 export function trackGemClickDirections(id: string, title: string, mapsUrl: string) {
   track?.("gem_click_directions", { id, title, mapsUrl });
 }
+export function trackGemClickInstagram(id: string, title: string, url: string) {
+  track?.("gem_click_instagram", { id, title, url });
+}
+export function trackGemClickFacebook(id: string, title: string, url: string) {
+  track?.("gem_click_facebook", { id, title, url });
+}

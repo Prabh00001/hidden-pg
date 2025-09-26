@@ -2,7 +2,8 @@
 import React, { useState, useRef, useEffect, useMemo } from "react";
 import { GEMS } from "../data/gems";
 import type { Gem } from "../types";
-import { getSuggestions } from "../utils/suggestions";
+import getSuggestions, { Suggestion } from "../utils/suggestions";
+
 
 interface Props {
   query: string;
@@ -30,7 +31,7 @@ export default function SearchBar({
   const inputRef = useRef<HTMLInputElement | null>(null);
   const listRef = useRef<HTMLUListElement | null>(null);
 
-  const suggestions: Gem[] = useMemo(() => getSuggestions(query, GEMS, 6), [query]);
+const suggestions: Suggestion[] = useMemo(() => getSuggestions(query, 6), [query]);
 
   useEffect(() => {
     const onEsc = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
@@ -57,12 +58,11 @@ export default function SearchBar({
     setSelected(-1);
   };
 
-  const chooseSuggestion = (s: Gem) => {
-    setQuery(s.name);
-    setOpen(false);
-    inputRef.current?.focus();
-    onSubmit?.(s.name);
-  };
+  const chooseSuggestion = React.useCallback((s: Suggestion) => {
+  const text = String(s.title ?? s.name ?? "");
+  setQuery(text);
+  onSubmit?.(text);
+}, [onSubmit]);
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (open && suggestions.length > 0) {
@@ -133,7 +133,7 @@ export default function SearchBar({
               className={`px-4 py-3 hover:bg-slate-50 cursor-pointer flex items-start gap-3 ${selected === i ? "bg-slate-100" : ""}`}
             >
               <img
-                src={s.img}
+                src={(((s as any)?.image ?? (s as any)?.img) as string | undefined)}
                 alt={s.name}
                 onError={(e) => ((e.currentTarget as HTMLImageElement).src = "/images/placeholder.jpg")}
                 className="w-12 h-8 object-cover rounded-md flex-shrink-0"
