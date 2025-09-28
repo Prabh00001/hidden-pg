@@ -2,7 +2,7 @@ import React from "react";
 import { createPortal } from "react-dom";
 import { Gem } from "../types";
 import SeoJsonLd from "../components/SeoJsonLd";
-import AnimatedGem from "./AnimatedGem";
+// import AnimatedGem from "./AnimatedGem";
 
 import {
   trackGemClickWebsite,
@@ -16,7 +16,7 @@ type Props = { gem: Gem; open: boolean; onClose: () => void };
 
 export default function GemModal({ gem, open, onClose }: Props) {
   const images = React.useMemo(
-    () => [gem.image, ...(gem.images ?? [])].filter(Boolean),
+    () => [gem.image, ...(gem.images ?? [])].filter((s): s is string => Boolean(s)),
     [gem.image, gem.images]
   );
   const [idx, setIdx] = React.useState(0);
@@ -50,32 +50,31 @@ export default function GemModal({ gem, open, onClose }: Props) {
     : undefined;
 
   const modal = (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center"
-      aria-modal="true"
-      role="dialog"
-    >
+    <div className="fixed inset-0 z-50 flex items-center justify-center" aria-modal="true" role="dialog">
       {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
-      />
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+
       {/* Panel */}
-      <div className="relative z-10 w-full max-w-4xl mx-4 rounded-2xl bg-white shadow-2xl overflow-hidden">
+      <div className="relative z-10 w-[95vw] max-w-6xl mx-4 rounded-2xl bg-white shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200">
-          <div>
-            <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
-            <p className="text-xs text-slate-500 mt-0.5">{gem.category}</p>
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              {gem.brand?.logo && (
+                <img
+                  src={gem.brand.logo}
+                  alt={gem.brand.logoAlt ?? `${gem.brand.name ?? "Brand"} logo`}
+                  className="h-6 w-auto object-contain"
+                />
+              )}
+              <h3 className="truncate text-lg font-semibold text-slate-900">{title}</h3>
+            </div>
+            {!!gem.category && <p className="text-xs text-slate-500 mt-0.5">{gem.category}</p>}
           </div>
-            {/*<AnimatedGem className="absolute -right-3 -top-3" size={44} hue={210} anim="slow" />*/}
 
-          <button
-            aria-label="Close"
-            onClick={onClose}
-            className="p-2 rounded-full hover:bg-slate-100"
-          >
-            {/* X icon */}
+          {/* <AnimatedGem className="absolute -right-3 -top-3" size={44} hue={210} anim="slow" /> */}
+
+          <button aria-label="Close" onClick={onClose} className="p-2 rounded-full hover:bg-slate-100">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
               <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" />
             </svg>
@@ -85,28 +84,22 @@ export default function GemModal({ gem, open, onClose }: Props) {
         {/* Body */}
         <div className="grid md:grid-cols-2 gap-0">
           {/* Gallery */}
-          <div className="relative bg-slate-50">
-            <picture>
-  <source
-    type="image/webp"
-    srcSet={[
-      `${images[idx].replace(/(-\d+w)?\.(webp|jpg|jpeg|png)$/i, "-800w.webp")} 800w`,
-      `${images[idx].replace(/(-\d+w)?\.(webp|jpg|jpeg|png)$/i, "-1200w.webp")} 1200w`,
-      `${images[idx].replace(/(-\d+w)?\.(webp|jpg|jpeg|png)$/i, "-1600w.webp")} 1600w`,
-    ].join(", ")}
-    sizes="(max-width: 768px) 90vw, 800px"
-  />
-  <img
-    src={images[idx].replace(/(-\d+w)?\.(webp|jpg|jpeg|png)$/i, "-1600w.webp")}
-    alt={`${title} photo ${idx + 1}`}
-    className="w-full h-full object-cover md:aspect-[4/3] aspect-[16/10]"
-    loading="lazy"
-    decoding="async"
-  />
-</picture>
+          <div className="relative bg-slate-50 flex items-center justify-center" style={{ maxHeight: "82vh" }}>
+            {/* The actual image (fixes the 'src=/images/...' text) */}
+            {images.length > 0 ? (
+              <img
+                src={images[idx] ?? ""}
+                alt={`${title} photo ${idx + 1}`}
+                className="max-h-[82vh] w-auto max-w-full object-contain select-none"
+                loading="eager"
+                decoding="async"
+                onError={() => setIdx(0)}
+              />
+            ) : (
+              <div className="text-sm text-neutral-500">No image available</div>
+            )}
 
-              {/*<AnimatedGem className="absolute left-2 top-2" size={28} hue={210} anim="med" />*/}
-
+            {/* Prev/Next */}
             {images.length > 1 && (
               <>
                 <button
@@ -128,11 +121,11 @@ export default function GemModal({ gem, open, onClose }: Props) {
                   </svg>
                 </button>
 
-                {/* Thumbs */}
+                {/* Dots */}
                 <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2 px-2 py-1 bg-white/80 rounded-full shadow">
                   {images.map((src, i) => (
                     <button
-                      key={src + i}
+                      key={`${i}-${src}`}
                       onClick={() => setIdx(i)}
                       className={`w-2.5 h-2.5 rounded-full ${i === idx ? "bg-slate-900" : "bg-slate-300"}`}
                       aria-label={`Show image ${i + 1}`}
@@ -227,10 +220,25 @@ export default function GemModal({ gem, open, onClose }: Props) {
                 </a>
               )}
             </div>
+
+            {/* Photo Credit */}
+            {gem.photoCredit?.name && (
+              <p className="mt-4 text-xs text-slate-500">
+                Photos ©{" "}
+                {gem.photoCredit.url ? (
+                  <a href={gem.photoCredit.url} target="_blank" rel="noopener" className="underline hover:no-underline">
+                    {gem.photoCredit.name}
+                  </a>
+                ) : (
+                  gem.photoCredit.name
+                )}
+                . Used with permission.
+              </p>
+            )}
           </div>
         </div>
 
-        {/* JSON-LD (kept compact) */}
+        {/* JSON-LD */}
         <SeoJsonLd
           data={{
             "@context": "https://schema.org",
@@ -239,9 +247,7 @@ export default function GemModal({ gem, open, onClose }: Props) {
             image: images,
             url: gem.website || undefined,
             telephone: gem.phone || undefined,
-            address: gem.address
-              ? { "@type": "PostalAddress", streetAddress: gem.address }
-              : undefined,
+            address: gem.address ? { "@type": "PostalAddress", streetAddress: gem.address } : undefined,
           }}
         />
       </div>
@@ -251,10 +257,7 @@ export default function GemModal({ gem, open, onClose }: Props) {
   return createPortal(modal, document.body);
 }
 
-function withUTM(
-  url: string,
-  params: { source: string; medium: string; campaign: string }
-) {
+function withUTM(url: string, params: { source: string; medium: string; campaign: string }) {
   try {
     const u = new URL(url);
     u.searchParams.set("utm_source", params.source);

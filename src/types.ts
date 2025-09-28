@@ -1,78 +1,102 @@
 // src/types.ts
 // ---------------------------------------------------------------------------
-// Flexible, back-compatible types for Hidden PG
-// - Allows old data keys (name/desc/tags) while we migrate to title/description
-// - Permissive Category type so filters keep working
-// - Index signature to avoid "Object literal may only specify known properties"
-//   errors coming from gems.ts while we standardize fields.
+// Hidden PG — Flexible, back-compatible types
+// - Keeps older keys (name/desc) alongside new ones (title/description)
+// - Adds brand/logo + photo credit support used by GemCard & GemModal
+// - Permissive Category type; optional fields to avoid TS breakage
+// - Index signature so unknown fields in gems.ts never error
 // ---------------------------------------------------------------------------
 
+/* --------------------------------- Category -------------------------------- */
 export type Category =
   | "Food"
   | "Cafe"
   | "Restaurant"
+  | "Bakery"
+  | "Bar"
+  | "Shop"
   | "Attraction"
   | "Trail"
   | "Park"
-  | "Shop"
-  | "Activity"
   | "Event"
-  | "Service"
   | "Other"
-  // allow any other string labels used today:
-  | (string & {});
+  | (string & {}); // allow any custom category strings without losing literal types
 
-export interface PhotoCredit {
-  name: string;
-  url?: string;
-}
+/* ------------------------------- Photo Credit ------------------------------ */
+export type PhotoCredit = {
+  name: string;     // e.g., "Deb’s Café & Specialty Bakery"
+  url?: string;     // optional: link to IG/FB/site
+};
 
+/* ----------------------------------- Brand --------------------------------- */
+export type Brand = {
+  name: string;     // business name for accessibility
+  logo?: string;    // /images/logos/xxx.svg|png
+  logoAlt?: string; // accessible alt, defaults to `${name} logo` if omitted
+};
+
+/* ------------------------------------ Gem ---------------------------------- */
 export interface Gem {
-  // Core
+  // Required
   id: string;
-  category: Category;
-  image: string;
 
-  // Canonical fields (preferred going forward)
-  title: string;
-  description: string;
+  // Naming (support both new & legacy)
+  title?: string;          // preferred
+  name?: string;           // legacy
 
-  // Optional enrichments
-  slug?: string;
-  images?: string[];
-  address?: string;
-  mapsUrl?: string;
-  website?: string;
-  phone?: string;
-  instagram?: string;
-  facebook?: string;
-  sponsored?: boolean;
-  featured?: boolean;
-  photoCredit?: PhotoCredit;
+  // Description (support both new & legacy)
+  description?: string;    // preferred
+  desc?: string;           // legacy
 
-  // -------------------------------------------------------------------------
-  // Back-compat aliases (keeps older code/data compiling):
-  // -------------------------------------------------------------------------
-  /** @deprecated Use `title` */
-  name?: string;
-  /** @deprecated Use `description` */
-  desc?: string;
-  /** Optional label metadata used by filters/search */
+  // Categorization
+  category?: Category;
   tags?: string[];
 
-  // -------------------------------------------------------------------------
-  // Safety valve: if some items in gems.ts currently include extra keys,
-  // we won't blow up the build. We'll tighten this later once all data is clean.
-  // -------------------------------------------------------------------------
+  // Routing
+  slug?: string;
+
+  // Media
+  image?: string;          // cover (card hero)
+  images?: string[];       // gallery (modal)
+  brand?: Brand;           // NEW (logo chip on card + modal header)
+  photoCredit?: PhotoCredit; // NEW (inline credit in modal details)
+
+  // Business info / CTAs
+  website?: string;
+  phone?: string;
+  mapsUrl?: string;
+  instagram?: string;
+  facebook?: string;
+  address?: string;
+
+  // Commercial flags
+  sponsored?: boolean;
+
+  // Optional meta
+  createdAt?: string;      // ISO date strings if you ever set them
+  updatedAt?: string;
+
+  // Safety net: allow extra fields in gems.ts without TS errors
   [key: string]: unknown;
 }
 
+/* --------------------------------- Helpers --------------------------------- */
+export type GemList = Gem[];
 
-export interface FeaturedItem {
+/* ------------------------------- UI/Content -------------------------------- */
+export interface NavLink {
+  href: string;
+  label: string;
+  external?: boolean;
+}
+
+export interface SpotlightItem {
   id: string;
-  name: string;
+  title: string;
   img: string;
   blurb: string;
+  href?: string;
+  tag?: string;
 }
 
 export interface BlogPost {
@@ -80,8 +104,18 @@ export interface BlogPost {
   title: string;
   img: string;
   excerpt: string;
-  date: string;      // e.g. "2025-08-01"
-  content?: string;  // full story (optional)
-  slug?: string;     // optional pretty URL
-  tags?: string[];   // optional tag chips for UI/SEO
+  date: string;      // "YYYY-MM-DD"
+  content?: string;  // optional full story
+  slug?: string;     // pretty URL
+  tags?: string[];   // chips for UI/SEO
+}
+
+// Back-compat for the Featured section cards
+export interface FeaturedItem {
+  id: string;
+  name: string;   // display title on the feature card
+  img: string;    // image shown on the feature card
+  blurb: string;  // short description
+  href?: string;  // optional link (if your featured.ts uses it)
+  tag?: string;   // optional label/chip
 }
