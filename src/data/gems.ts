@@ -151,6 +151,133 @@ const RAW_GEMS: LegacyGem[] = [
   facebook: "https://www.facebook.com/DebscafePrinceGeorge",      // add if you have it
   tags: ["bakery", "breakfast", "pastries", "coffee", "local", "PG"],
 },
+{
+  id: "lheidli-tenneh-memorial-park",
+  slug: "lheidli-tenneh-memorial-park",
+  title: "Lheidli T’enneh Memorial Park",
+  name: "Lheidli T’enneh Memorial Park",
+  category: "Park",
+  image: "/images/gems/lheidli-tenneh-memorial-park/cover-1200w.webp",
+  images: [
+    "/images/gems/lheidli-tenneh-memorial-park/2-1600w.webp",
+    "/images/gems/lheidli-tenneh-memorial-park/3-1600w.webp",
+    "/images/gems/lheidli-tenneh-memorial-park/4-1600w.webp",
+    "/images/gems/lheidli-tenneh-memorial-park/5-1600w.webp",
+    "/images/gems/lheidli-tenneh-memorial-park/6-1600w.webp",
+    "/images/gems/lheidli-tenneh-memorial-park/7-1600w.webp",
+    "/images/gems/lheidli-tenneh-memorial-park/8-1600w.webp",
+  ],
+  description:
+    "PG’s flagship riverside green—family-friendly with a summer spray park, Kiwanis Bandshell, The Exploration Place museum, and the Little Prince mini steam train, plus connected paths into the Heritage River Trail system.",
+  desc:
+    "Riverside hub: spray park, bandshell, The Exploration Place, mini steam train, and trail connections.",
+  tags: ["family", "playground", "spray-park", "museum", "river", "trails"],
+  mapsUrl: "https://maps.google.com/?q=Lheidli%20T%27enneh%20Memorial%20Park%20Prince%20George",
+  photoCredit: { name: "Photos by Hidden PG" }
+},
+{
+  id: "connaught-hill-park",
+  slug: "connaught-hill-park",
+  title: "Connaught Hill Park",
+  name: "Connaught Hill Park",
+  category: "Park",
+  image: "/images/gems/connaught-hill-park/cover-1200w.webp",
+  images: [
+    "/images/gems/connaught-hill-park/1-1600w.webp",
+  ],
+  description:
+    "Iconic hilltop lookout with manicured flower beds, a decorative mill wheel, picnic spots, and easy city panoramas right above downtown.",
+  desc:
+    "Hilltop gardens, mill wheel, and sweeping city views steps from downtown.",
+  tags: ["viewpoint", "gardens", "downtown", "picnic"],
+  mapsUrl: "https://maps.google.com/?q=Connaught%20Hill%20Park%20Prince%20George",
+  photoCredit: { name: "Photos by Hidden PG" }
+},
+{
+  id: "lc-gunn-park",
+  slug: "lc-gunn-park",
+  title: "L.C. Gunn Park",
+  name: "L.C. Gunn Park",
+  category: "Park",
+  image: "/images/gems/lc-gunn-park/cover-1200w.webp",
+  images: [
+    "/images/gems/lc-gunn-park/1-1600w.webp",
+    "/images/gems/lc-gunn-park/2-1600w.webp",
+  ],
+  description:
+    "Cutbank-edge trail with big Fraser River and city views. A locals’ favourite for quick hikes—stay well back from the escarpment edge and enjoy the lookouts.",
+  desc:
+    "Clifftop views over the Fraser; scenic trail—mind the edges.",
+  tags: ["trails", "lookouts", "river", "cutbanks"],
+  mapsUrl: "https://maps.google.com/?q=L.C.%20Gunn%20Park%20Prince%20George",
+  photoCredit: { name: "Photos by Hidden PG" }
+},
+{
+  id: "west-lake-provincial-park",
+  slug: "west-lake-provincial-park",
+  title: "West Lake Provincial Park",
+  name: "West Lake Provincial Park",
+  category: "Park",
+  image: "/images/gems/west-lake-provincial-park/cover-1200w.webp",
+  images: [
+    "/images/gems/west-lake-provincial-park/1-1600w.webp",
+    "/images/gems/west-lake-provincial-park/2-1600w.webp",
+    "/images/gems/west-lake-provincial-park/3-1600w.webp",
+    "/images/gems/west-lake-provincial-park/4-1600w.webp",
+  ],
+  description:
+    "Year-round day-use lake park ~22 km SW of PG: swimming beaches and grassy picnic areas in summer, boat launch and fishing, plus winter XC-skiing and tobogganing when conditions allow.",
+  desc:
+    "Day-use lake with beaches, picnic areas, boat launch, fishing; winter XC-skiing/tobogganing.",
+  tags: ["beach", "picnic", "boat-launch", "winter", "family"],
+  mapsUrl: "https://maps.google.com/?q=West%20Lake%20Provincial%20Park%20Prince%20George",
+  photoCredit: { name: "Photos by Hidden PG" }
+},
+{
+  id: "injoy-studio-and-boutique",
+  slug: "injoy-studio-and-boutique",
+  title: "InJoy Studio & Boutique",
+  name: "InJoy Studio & Boutique",
+  category: "Shop • Wellness",
+  image: "/images/gems/injoy-studio-and-boutique/cover-800w.webp",
+  images: [
+    // "/images/gems/injoy-studio-and-boutique/1-1600w.webp",
+  ],
+  description:
+    "Metaphysical studio and downtown boutique for uplifting wellness: crystals, oracle/tarot decks, books, candles and aura sprays, plus services like Reiki and energy work, reflexology, massage, angel/intuitive readings, and periodic Reiki level workshops.",
+  desc:
+    "Downtown metaphysical boutique + studio: crystals & decks, Reiki, reflexology, massage, angel/intuitive readings, workshops.",
+  tags: ["crystals", "reiki", "reflexology", "massage", "readings", "downtown", "workshops"],
+  website: "http://www.injoystudio.ca/",
+  phone: "+1-250-649-0009",
+  mapsUrl: "https://maps.google.com/?q=1409%209th%20Ave%20Prince%20George%20BC",
+  instagram: "https://www.instagram.com/injoystudioandboutique/",
+  facebook: "https://www.facebook.com/InJoyStudioAndBoutique/",
+  photoCredit: {
+    name: "InJoy Studio & Boutique (Instagram/Facebook)",
+    url: "https://www.instagram.com/injoystudioandboutique/"
+  }
+},
+{
+  id: "spicy-greens-restaurant",
+  slug: "spicy-greens-restaurant",
+  title: "Spicy Greens Restaurant",
+  name: "Spicy Greens Restaurant",
+  category: "Food",
+  image: "/images/gems/golden-bento/cover-1200w.webp",
+  images: [
+    // "/images/gems/spicy-greens-restaurant/1-1600w.webp",
+  ],
+  description:
+    "South Indian–Sri Lankan–Singaporean crossover with Chinese classics: dosa, biryani and kothu-style plates meet curries and stir-fries. Sit-down or takeout at the College Heights location on Domano Blvd.",
+  desc:
+    "Tamil/Sinhalese-leaning menu with dosa, biryani, kothu and curries; dine-in or takeout on Domano Blvd.",
+  tags: ["south-indian", "sri-lankan", "singaporean", "chinese", "curry", "dosa", "takeout"],
+  website: "https://www.spicygreensrestaurant.com/",
+  phone: "+1-778-416-1616",
+  mapsUrl: "https://maps.google.com/?q=5087%20Domano%20Blvd%20Prince%20George%20BC",
+  photoCredit: { name: "Spicy Greens" }
+},
   {
   id: "cottonwood-island-park",
   slug: "cottonwood-island-park",
